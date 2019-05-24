@@ -56,13 +56,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()
         .and()
         .formLogin()
-        .loginPage("/oauth/login")
-        .loginProcessingUrl("/oauth/form")
-        .failureUrl("/oauth/login?error")
+        .loginPage("/login")
+        .loginProcessingUrl("/login/form")
+        .failureUrl("/login?error")
         .permitAll()
         .and()
         .sessionManagement()
-        .invalidSessionUrl("/oauth/login")
+        .invalidSessionUrl("/login")
         .maximumSessions(1)
         .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
     }

@@ -9,8 +9,12 @@ import com.tongu.rbac.security.WebUserDetails;
 public class BaseController {
 
 	public UserEntity getUser() {
-		WebUserDetails user = (WebUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return user.getUser();
+		Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(object != null && object instanceof WebUserDetails) {
+			WebUserDetails user = (WebUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return user.getUser();
+		}
+		return null;
 	}
 	
 	/** 默认成功，无数据 */

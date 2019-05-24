@@ -38,7 +38,8 @@ public class LoginController extends BaseController{
 			}
 		}
 		if(req.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION") != null) {
-			model.addAttribute("error", "true");
+			Exception ex = (Exception)req.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+			model.addAttribute("error", ex.getMessage());
 		}
 		return "login";
 	}
@@ -48,11 +49,5 @@ public class LoginController extends BaseController{
 	public String home(Model model) {
 		
 		return "login";
-	}
-	
-	@RequestMapping(value="/logfailure", method = RequestMethod.GET)
-	public @ResponseBody RespData<String> loginFailure(HttpServletRequest req, Model model) {
-		Exception ex = (Exception)req.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
-		return failure(ex.getMessage());
 	}
 }
