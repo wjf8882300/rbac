@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author wangjf
  *
  */
-public class ResponseUtil {
+public class HttpUtil {
 
 	/**
 	 * 文件下载
@@ -42,6 +43,11 @@ public class ResponseUtil {
 	public static HttpServletResponse getResponse() {
 		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 		return response;
+	}
+	
+	public static HttpServletRequest getRequest() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		return request;
 	}
 	
 	/**

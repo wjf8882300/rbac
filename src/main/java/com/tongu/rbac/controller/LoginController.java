@@ -4,13 +4,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tongu.rbac.model.RespData;
+import com.tongu.rbac.util.RandomUtil;
+import com.tongu.rbac.util.RandomUtil.RandomTypeEnum;
 
 /**   
  * 登录
@@ -37,10 +41,17 @@ public class LoginController extends BaseController{
 				}
 			}
 		}
-		if(req.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION") != null) {
-			Exception ex = (Exception)req.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
-			model.addAttribute("error", ex.getMessage());
+		if(req.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) != null) {
+			AuthenticationException exception = (AuthenticationException) req.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+			if(exception instanceof BadCredentialsException) {
+				model.addAttribute("error", "用户名或者密码错误");
+			} else if(exception instanceof UsernameNotFoundException){
+				model.addAttribute("error", "该用户不存在");
+			} else {
+				model.addAttribute("error", exception.getMessage());
+			}
 		}
+		model.addAttribute("token", RandomUtil.getRandomString(16, RandomTypeEnum.RANDOM_TYPE_OTHER));
 		return "login";
 	}
 	

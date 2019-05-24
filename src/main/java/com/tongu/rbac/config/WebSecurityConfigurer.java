@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.tongu.rbac.security.SessionInformationExpiredStrategyImpl;
 import com.tongu.rbac.security.WebUserDetailsService;
+import com.tongu.rbac.util.DesUtil;
+import com.tongu.rbac.util.HttpUtil;
 
 @Configuration
 @EnableWebSecurity
@@ -33,12 +35,26 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder);
+            .passwordEncoder(new PasswordEncoder() {
+
+				@Override
+				public String encode(CharSequence rawPassword) {
+					return passwordEncoder.encode(rawPassword);
+				}
+
+				@Override
+				public boolean matches(CharSequence rawPassword, String encodedPassword) {
+					String token = (String)HttpUtil.getRequest().getAttribute("token");
+					return passwordEncoder.encode(DesUtil.strDec((String)rawPassword, token, null, null)).equals(encodedPassword);
+				}
+            });
     }
  
     //不定义没有password grant_type
