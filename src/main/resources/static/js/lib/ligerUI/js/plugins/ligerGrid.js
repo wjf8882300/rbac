@@ -1,4 +1,4 @@
-﻿/**
+/**
 * jQuery ligerUI 1.3.3
 * 
 * http://ligerui.com
@@ -751,7 +751,7 @@
                 p.newPage = loadDataParm;
             }
             //参数初始化
-            if (!p.newPage) p.newPage = 1;
+            if (!p.newPage) p.newPage = 0;
             if (p.dataAction == "server")
             {
                 if (!p.sortOrder) p.sortOrder = "asc";
@@ -871,16 +871,6 @@
                 },
                 success: function (data)
                 {
-                	if(data.result.hasOwnProperty("success")) {
-                		if(data.result.hasOwnProperty("data")){
-                			if(data.result.data.hasOwnProperty("data")) {
-                				data = data.result.data;
-                			}
-                			else {
-                				data = data.result;
-                			}
-                		}               		
-                	}              	
                     g.trigger('success', [data, g]);
                     if (!data || !data[p.root] || !data[p.root].length)
                     {

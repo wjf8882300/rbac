@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>锋锋科技后台管理系统</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <!--Header-part-->
+    <div id="header">
+        <h1><a href="/">锋锋科技后台管理系统</a></h1>
+    </div>
+    <!--close-Header-part-->
+
+    <div id="user-nav" class="navbar navbar-inverse">
+        <form id="logoutForm" action="/logout" method="post">
+            <ul class="nav" style="width: auto; margin: 0px;">
+                <li class="">
+                    <a title="" href="#" id="logout"><i class="icon icon-share-alt"></i> <span
+                            class="text">退出系统</span></a>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <!--sidebar-menu-->
+    <div id="sidebar" class="sidebar">
+        <ul th:each="item:${menuList }">
+                <li class="submenu" th:if="${item.menuLevel} eq '1'">
+                    <a href="#"><i th:attr="class='icon '+${item.menuIcon}"></i><span th:text="${item.menuName}"></span></a>
+                    <b class="arrow fa fa-angle-down"></b>
+                    <ul th:each="subItem:${menuList}">
+                        <li th:if="${subItem.parentId == item.id }">
+                            <a href="javascript:void(0)" th:attr="data-menu_url=${subItem.menuUrl}, data-menu_name=${subItem.menuName }, data-menu_flag=${subItem.menuFlag }">
+                                <i th:attr="class='icon '+${subItem.menuIcon }"></i>
+                                <span th:text="${subItem.menuName}" style="margin-left:10px;"></span></a>
+                        </li>
+                    </ul>
+                </li>
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+
+    <div id="content">
+        <!--main-container-part-->
+        <div class="main-content">
+            <div id="layout1" class="l-layout mylayout"
+                style="width: 99.2%; margin: 2px auto 0px; height: 446px;background-color: #ffffff;">
+                <div position="center" id="framecenter">
+                </div>
+            </div>
+        </div>
+        <!--end-main-container-part-->
+    </div>
+
+    <!--Footer-part-->
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2016 &copy; 锋锋科技</div>
+    </div>
+    <!--end-Footer-part-->
+    <script src="/js/lib/requirejs/require.js" require-module="page/index" data-main="/js/main.js"></script>
+</body>
+
+</html>

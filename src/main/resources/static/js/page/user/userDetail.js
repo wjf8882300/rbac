@@ -55,7 +55,7 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
     function init() {
     	var dialogData = dialog.get("data");//获取data参数
 		if(dialogData.name === "update") {
-			Common.queryById(Constant.user.queryById, {id:dialogData.id}, function(data) {
+			Common.queryById(Constant.user.queryById + dialogData.id, {}, function(data) {
 				var user = data.result.data;
 				$("#loginName").val(user.loginName);
 				$("#loginPassword").val(user.loginPassword);

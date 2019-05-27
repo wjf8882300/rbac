@@ -2,17 +2,13 @@ define(["jquery", "Common", "Constant", "ligerui.ligerTab", "ligerui.ligerLayout
 	
 	var tab = null;
 	var accordion = null;
-	var tree = null;
-	var tabItems = [];
 
 	var init = function() {
 				
-		$("[to-url]").each(function () {			
+		$("[data-menu_url]").each(function () {			
 			$(this).bind("click",function(){
-					var nav = $(this).attr("nav-n");
-					var sn = nav.split(",");
-					f_addTab(sn[1], sn[0], $(this).attr("to-url"));
-					$("[to-url]").each(function () {
+					f_addTab($(this).data("menu_flag"), $(this).data("menu_name"), $(this).data("menu_url"));
+					$("[data-menu_url]").each(function () {
 						if($(this).hasClass("onsubmenu")) {
 							$(this).removeClass("onsubmenu"); 
 						}

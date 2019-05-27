@@ -42,3 +42,4 @@ spring:
 logging:
   level:
    com.tongu.rbac: DEBUG
+   org.springframework: info

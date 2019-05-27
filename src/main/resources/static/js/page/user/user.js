@@ -6,7 +6,8 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 		 * 记载列表
 		 */
 		grid = $("#maingrid4").ligerGrid({
-	        checkbox: true,
+            checkbox: true,
+            method: 'get',
 	        columns: [
 	        { display: '登录用户名', name: 'loginName'},
 	        { display: '身份证名称', name: 'custName'},
@@ -16,14 +17,14 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        ], 
 	        url:Constant.user.queryAll,
 	        parms:null,
-	        contentType:"application/json",
+	        //contentType:"application/json",
 	        root:"data",
-	        record:"iTotalDisplayRecords",
+	        record:"totalElements",
 	        rownumbers:false,
-	        pageParmName:"start",
-	        pagesizeParmName:"length",
+	        pageParmName:"page",
+	        pagesizeParmName:"size",
 	        page:0,
-	        pageSize:10,
+	        pageSize:20,
 	        width: '100%',
 	        height:'97%',
 	        onSuccess:function(data, grid) {

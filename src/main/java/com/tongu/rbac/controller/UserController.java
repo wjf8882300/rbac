@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tongu.rbac.model.RespData;
@@ -59,7 +60,7 @@ public class UserController extends BaseController{
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/query")
-	public @ResponseBody RespData<Page<UserEntity>> queryAllUser(@RequestBody UserEntity entity, @PageableDefault(sort = { "create_date" }, direction = Sort.Direction.DESC)Pageable page) {
+	public @ResponseBody RespData<Page<UserEntity>> queryAllUser(@RequestParam(required = false) UserEntity entity, @PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC)Pageable page) {
 		return success(userService.queryAll(entity, page));
 	}
 	

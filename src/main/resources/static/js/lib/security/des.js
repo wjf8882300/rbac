@@ -5,9 +5,9 @@
 	 * @author Guapo
 	 * @see DESCore
 	 */
+define(function(){
 
-	var des = {
-
+	return {
 		/*
 		 * encrypt the string to string made up of hex return the encrypted
 		 * string
@@ -964,7 +964,8 @@
 			}
 			return keys;
 		}
-	}
+	};
+});
 	// end-------------------------------------------------------------------------------------------------------------
 	/*
 	 * function test() {

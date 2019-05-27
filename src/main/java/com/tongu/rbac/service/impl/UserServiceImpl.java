@@ -7,6 +7,7 @@
 package com.tongu.rbac.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Page<UserEntity> queryAll(UserEntity entity, Pageable page) {
-		Page<UserEntity> pageList = userRepository.findAll(Example.of(entity), page);
+		Page<UserEntity> pageList = userRepository.findAll(Example.of(Optional.ofNullable(entity).orElse(new UserEntity())), page);
 		return pageList;
 	}
 

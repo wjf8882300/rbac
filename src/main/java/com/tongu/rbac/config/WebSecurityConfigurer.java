@@ -51,8 +51,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 				@Override
 				public boolean matches(CharSequence rawPassword, String encodedPassword) {
-					String token = (String)HttpUtil.getRequest().getAttribute("token");
-					return passwordEncoder.encode(DesUtil.strDec((String)rawPassword, token, null, null)).equals(encodedPassword);
+					String token = (String)HttpUtil.getRequest().getParameter("token");
+					return passwordEncoder.matches(DesUtil.strDec((String)rawPassword, token, null, null), encodedPassword);
 				}
             });
     }
@@ -66,7 +66,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		http.headers().frameOptions().sameOrigin()
+		.and().csrf().disable()
         .authorizeRequests()
         .antMatchers("/**", "/user/**", "/oauth/**", "/actuator/**", "/v2/api-docs").permitAll()
         .anyRequest().authenticated()

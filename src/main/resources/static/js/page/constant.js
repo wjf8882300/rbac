@@ -16,38 +16,38 @@ define(function() {
 		 * 用户管理
 		 */
 		user: {
-			list:"/html/user/list.html", //列表页面
-			detail:"/html/user/detail.html", //详细页面
-			queryAll:"/ck/user/queryAllUser", //列表页面表格数据
-			save:"/ck/user/saveUser",
-			del:"/ck/user/deleteUser",
-			queryById:"/ck/user/queryById"
+			list:"/user/list", //列表页面
+			detail:"/user/detail", //详细页面
+			queryAll:"/user/query", //列表页面表格数据
+			save:"/user/save",
+			del:"/user/delete",
+			queryById:"/user/query/"
 		},
 		
 		/**
 		 * 角色管理
 		 */
 		role: {
-			list:"/html/role/list.html",
-			detail:"/html/role/detail.html",
-			queryAll:"/ck/role/queryAll",
-			save:"/ck/role/saveRole",
-			del:"/ck/role/deleteRole",
-			queryById:"/ck/role/queryById",
-			grant:"/html/role/grant.html"			
+			list:"/role/list",
+			detail:"/role/detail",
+			queryAll:"/role/query",
+			save:"/role/save",
+			del:"/role/delete",
+			queryById:"/role/query/",
+			grant:"/role/grant"			
 		},
 		
 		/**
 		 * 菜单管理
 		 */
 		menu: {
-			list:"/html/menu/list.html",
-			detail:"/html/menu/detail.html",
-			queryAll:"/ck/menu/queryAll",
-			save:"/ck/menu/saveMenu",
-			del:"/ck/menu/deleteMenu",
-			queryById:"/ck/menu/queryById",
-			queryByRoleId:"/ck/menu/queryByRoleId"
+			list:"/menu/list.html",
+			detail:"/menu/detail.html",
+			queryAll:"/menu/query",
+			save:"/menu/save",
+			del:"/menu/delete",
+			queryById:"/menu/query/",
+			queryByRoleId:"/menu/query/by/role/"
 		}
 	};
 });

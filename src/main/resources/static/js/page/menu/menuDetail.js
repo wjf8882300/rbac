@@ -73,7 +73,7 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
         });
     	var dialogData = dialog.get("data");//获取data参数
 		if(dialogData.name === "update") {
-			Common.queryById(Constant.menu.queryById, {id:dialogData.id}, function(data) {
+			Common.queryById(Constant.menu.queryById + dialogData.id, {}, function(data) {
 				var menu = data.result.data;
 				$("#menuName").val(menu.menuName);
 				$("#menuFlag").val(menu.menuFlag);

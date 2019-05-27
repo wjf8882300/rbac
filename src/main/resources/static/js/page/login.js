@@ -1,4 +1,4 @@
-define(["jquery", ], function($){
+define(["jquery", "des"], function($, des){
 	var init = function() {
 		/**
 		 * 登录

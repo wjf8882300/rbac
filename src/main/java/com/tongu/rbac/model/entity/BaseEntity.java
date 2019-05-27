@@ -39,7 +39,7 @@ public abstract class BaseEntity implements java.io.Serializable {
 
 	/** 创建时间 */
 	@Temporal(TemporalType.TIMESTAMP)
-	protected Date createDate=new Date();
+	protected Date createDate;
 
 	/** 创建人 */
 	@Column(length = 150)
@@ -55,15 +55,15 @@ public abstract class BaseEntity implements java.io.Serializable {
 
 	/** 更新时间 */
 	@Temporal(TemporalType.TIMESTAMP)
-	protected Date lastUpdateDate = new Date();
+	protected Date lastUpdateDate;
 	
 	/** 版本 */
 	@Version
-	protected Integer version = 0;
+	protected Integer version;
 
 	/** 状态 */
 	@Column
-	protected String recordStatus="有效";
+	protected String recordStatus;
 	
 	/**
 	 * @author HuangXiaodong 2015-04-17
@@ -81,6 +81,7 @@ public abstract class BaseEntity implements java.io.Serializable {
 		}
 		this.setLastUpdateUser(custId);
 		this.setLastUpdateDate(new Date());
+		this.setRecordStatus("0");
 	}
 
 }

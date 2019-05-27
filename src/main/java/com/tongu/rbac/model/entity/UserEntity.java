@@ -18,12 +18,10 @@ import lombok.Setter;
 @Table(name = "CK_T_USER")
 public class UserEntity extends BaseEntity  {
 
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = -318444171334675763L;
 
 	/**
 	 * 
