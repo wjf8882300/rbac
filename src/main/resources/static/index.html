@@ -15,10 +15,10 @@
     <!--close-Header-part-->
 
     <div id="user-nav" class="navbar navbar-inverse">
-        <form id="logoutForm" action="/logout" method="post">
+        <form id="logoutForm" action="/logout" method="get">
             <ul class="nav" style="width: auto; margin: 0px;">
                 <li class="">
-                    <a title="" href="#" id="logout"><i class="icon icon-share-alt"></i> <span
+                    <a href="#" id="logout"><i class="icon icon-share-alt"></i> <span
                             class="text">退出系统</span></a>
                 </li>
             </ul>
@@ -28,7 +28,7 @@
     <!--sidebar-menu-->
     <div id="sidebar" class="sidebar">
         <ul th:each="item:${menuList }">
-                <li class="submenu" th:if="${item.menuLevel} eq '1'">
+                <li class="submenu" th:if="${item.menuLevel} eq '1' and ${item.menuType} eq '01'">
                     <a href="#"><i th:attr="class='icon '+${item.menuIcon}"></i><span th:text="${item.menuName}"></span></a>
                     <b class="arrow fa fa-angle-down"></b>
                     <ul th:each="subItem:${menuList}">

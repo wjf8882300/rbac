@@ -59,7 +59,12 @@ define(["jquery", "Common", "Constant", "ligerui.ligerTab", "ligerui.ligerLayout
 	        text: text,
 	        url: url
 	    });
-	}
+    }
+    
+
+    $("#logout").click(function(){
+		$("#logoutForm").submit();
+	}); 
 	
 	return {
 		init:init

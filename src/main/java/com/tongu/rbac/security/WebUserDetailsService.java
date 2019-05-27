@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Sets;
 import com.tongu.rbac.constant.StatusEnum;
-import com.tongu.rbac.model.entity.RoleEntity;
+import com.tongu.rbac.model.entity.MenuEntity;
 import com.tongu.rbac.model.entity.UserEntity;
-import com.tongu.rbac.service.RoleService;
+import com.tongu.rbac.service.MenuService;
 import com.tongu.rbac.service.UserService;
 
 
@@ -35,7 +35,7 @@ public class WebUserDetailsService implements UserDetailsService {
 	private UserService userService;
 	
 	@Autowired
-	private RoleService roleService;
+	private MenuService menuService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,9 +54,9 @@ public class WebUserDetailsService implements UserDetailsService {
 			
 			// 设置用户权限
 			Set<GrantedAuthority> auths = Sets.newConcurrentHashSet();			
-			List<RoleEntity> roleList = roleService.queryByUserId(userEntity.getId());
-			for(RoleEntity r : roleList) {
-				auths.add(new SimpleGrantedAuthority(r.getRoleKey()));
+			List<MenuEntity> menuList = menuService.queryByUserId(userEntity.getId());
+			for(MenuEntity r : menuList) {
+				auths.add(new SimpleGrantedAuthority(r.getMenuFlag()));
 			}
 
 			WebUserDetails user = new WebUserDetails(userEntity, auths);

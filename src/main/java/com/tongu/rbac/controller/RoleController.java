@@ -80,8 +80,9 @@ public class RoleController extends BaseController{
 		return success();
 	}
 	
-	@PostMapping("/grant/role")
-	public @ResponseBody RespData<Object> grantRole(@RequestBody GrantMenuBO grantMenu){
+	@PostMapping("/grant/menus")
+	public @ResponseBody RespData<Object> grantMenus(@RequestBody GrantMenuBO grantMenu){
+		grantMenu.setUpdateUserId(getUser().getId());
 		roleService.grantRole(grantMenu);
 		return success();
 	}

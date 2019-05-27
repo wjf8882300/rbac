@@ -1,6 +1,7 @@
 package com.tongu.rbac.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -12,13 +13,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.tongu.rbac.constant.Constant;
+import com.tongu.rbac.exception.RbacErrorCodeEnum;
 import com.tongu.rbac.exception.RbacException;
 import com.tongu.rbac.model.entity.MenuEntity;
 import com.tongu.rbac.repository.MenuRepository;
 import com.tongu.rbac.repository.RoleMenuRepository;
 import com.tongu.rbac.service.MenuService;
+import com.tongu.rbac.util.BeanUtil;
 
 @Service("menuService")
 public class MenuServiceImpl implements MenuService {
@@ -41,6 +45,23 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public void saveMenu(MenuEntity menuEntity)  {		
+		if(Objects.isNull(menuEntity.getId())) {
+			MenuEntity oldMenu = new MenuEntity();
+			oldMenu.setMenuName(menuEntity.getMenuName());
+			List<MenuEntity> existsList = menuRepository.findAll(Example.of(oldMenu));
+			if(!CollectionUtils.isEmpty(existsList)) {
+				throw new RbacException(RbacErrorCodeEnum.MENU_EXISTS);
+			}
+		} else {
+			Optional<MenuEntity> optional = menuRepository.findById(menuEntity.getId());
+			if(!optional.isPresent()) {
+				throw new RbacException(RbacErrorCodeEnum.MENU_NOT_EXISTS);
+			}
+			MenuEntity exists = optional.get();
+			BeanUtil.copyPropertiesIgnoreNull(menuEntity, exists);
+			menuEntity = exists;
+		}
+
 		if(StringUtils.isEmpty(menuEntity.getParentId()) || Constant.MENU_ROOT_ID.equals(menuEntity.getParentId())) { // 父级是根目录
 			menuEntity.setMenuLevel(1);
 			menuEntity.setParentId("0");

@@ -751,7 +751,7 @@
                 p.newPage = loadDataParm;
             }
             //参数初始化
-            if (!p.newPage) p.newPage = 0;
+            if (!p.newPage) p.newPage = 1;
             if (p.dataAction == "server")
             {
                 if (!p.sortOrder) p.sortOrder = "asc";

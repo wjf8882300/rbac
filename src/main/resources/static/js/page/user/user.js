@@ -13,7 +13,15 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        { display: '身份证名称', name: 'custName'},
 	        { display: '身份证号码', name: 'credentialsCode'}, 
 	        { display: '电话', name: 'mobile' },
-	        { display: '状态', name: 'recordStatus'}
+            { display: '状态', name: 'recordStatus', 
+                render:function(row){
+                    if(row.recordStatus=='0'){
+                        return '启用';
+                    } else {
+                        return '禁用';
+                    }
+                }
+            }
 	        ], 
 	        url:Constant.user.queryAll,
 	        parms:null,

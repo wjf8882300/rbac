@@ -12,8 +12,24 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        { display: '菜单名称', name: 'menuName', id:'menuName'},
 	        { display: '菜单标识', name: 'menuFlag', id: 'menuFlag'},
 	        { display: '菜单级别', name: 'menuLevel', id: 'menuLevel'},
+	        { display: '菜单类型', name: 'menuType', id: 'menuType', 
+                render:function(row){
+                    if(row.menuType=='01'){
+                        return '菜单';
+                    } else {
+                        return '按钮';
+                    }
+                } },
 	        { display: '菜单地址', name: 'menuUrl', id: 'menuUrl'}, 
-	        { display: '是否启用', name: 'isEnabled', id: 'isEnabled' },	        
+	        { display: '是否启用', name: 'isEnabled', id: 'isEnabled', 
+                render:function(row){
+                    if(row.isEnabled=='01'){
+                        return '启用';
+                    } else {
+                        return '禁用';
+                    }
+                } 
+            },	        
 	        ], 
 	        url:Constant.menu.queryAll,
 	        parms:null,

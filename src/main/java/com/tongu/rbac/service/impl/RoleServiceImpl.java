@@ -59,12 +59,12 @@ public class RoleServiceImpl implements RoleService {
 			oldRole.setRoleName(roleEntity.getRoleName());
 			List<RoleEntity> existsList = roleRepository.findAll(Example.of(oldRole));
 			if(!CollectionUtils.isEmpty(existsList)) {
-				throw new RbacException(RbacErrorCodeEnum.USER_EXISTS);
+				throw new RbacException(RbacErrorCodeEnum.ROLE_EXISTS);
 			}
 		} else {
 			Optional<RoleEntity> optional = roleRepository.findById(roleEntity.getId());
 			if(!optional.isPresent()) {
-				throw new RbacException(RbacErrorCodeEnum.USER_NOT_EXISTS);
+				throw new RbacException(RbacErrorCodeEnum.ROLE_NOT_EXISTS);
 			}
 			RoleEntity exists = optional.get();
 			BeanUtil.copyPropertiesIgnoreNull(roleEntity, exists);

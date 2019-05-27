@@ -6,7 +6,15 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
             method: 'get',
 			columns:[
 			     { display: '角色名称', name:'roleName'},
-			     { display: '是否启用', name:'recordStatus'},
+			     { display: '是否启用', name:'recordStatus', 
+                    render:function(row){
+                        if(row.recordStatus=='0'){
+                            return '启用';
+                        } else {
+                            return '禁用';
+                        }
+                    }
+                },
 			     { display: '标识',name:'roleKey'},
 			     { display:'描述',name:'roleDesc'}
 			],

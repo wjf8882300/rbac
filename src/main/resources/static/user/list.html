@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta name="decorator" content="default"/>
 <link rel="stylesheet" href="/css/default.css" />
@@ -18,10 +19,10 @@
                 </div>	
                 <div class="control-group">  
                   <div class="controls">
-	              <button type="button" class="btn btn-success" id="bntAdd">新增</button>
-	              <button type="button" class="btn btn-info" id="bntUpdate">编辑</button>
-	              <button type="button" class="btn btn-danger" id="bntDelete">删除</button>
-	              <button type="button" class="btn btn-grey marR10" id="bntPermissions">分配角色</button>
+	              <button type="button" class="btn btn-success" id="bntAdd" sec:authorize="hasRole('ROLE_USER_INSERT')">新增</button>
+	              <button type="button" class="btn btn-info" id="bntUpdate" sec:authorize="hasRole('ROLE_USER_UPDATE')">编辑</button>
+	              <button type="button" class="btn btn-danger" id="bntDelete" sec:authorize="hasRole('ROLE_USER_DELETE')">删除</button>
+	              <button type="button" class="btn btn-grey marR10" id="bntPermissions" sec:authorize="hasRole('ROLE_USER_GRANT_ROLE')">分配角色</button>
 	              </div>
                 </div>	
 			</form>

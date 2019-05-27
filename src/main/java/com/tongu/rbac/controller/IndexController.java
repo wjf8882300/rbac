@@ -1,5 +1,7 @@
 package com.tongu.rbac.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -28,9 +30,9 @@ public class IndexController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured("ROLE_SYSTEM")
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
-	public String index(Model model) {
+	public String index(Model model, HttpServletRequest request) {
 		//加载菜单
 		model.addAttribute("menuList", menuService.queryByUserId(getUser().getId()));
 		return "index";

@@ -34,7 +34,8 @@ define(function() {
 			save:"/role/save",
 			del:"/role/delete",
 			queryById:"/role/query/",
-			grant:"/role/grant"			
+			grant:"/role/grant",
+			grantMenus:"/role/grant/menus"		
 		},
 		
 		/**

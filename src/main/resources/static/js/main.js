@@ -121,15 +121,22 @@ require.config({
 
 
 //根据配置加载所需模块
-var scripts = document.getElementsByTagName("script");
-for (var i = 0; i < scripts.length; i++) {
-	// 获取页面所需加载模块入口名称
-	var module = scripts[i].getAttribute("require-module");
-	if (module != undefined && module != "") {
-		require([ module ], function(Lib) {
-			Lib.init();
-		});
-		break;
-	}
-}
+require(["jquery"], function ($) {
+    $(document).ready(function() {
+        var scripts = document.getElementsByTagName("script");
+        for (var i = 0; i < scripts.length; i++) {
+            // 获取页面所需加载模块入口名称
+            var module = scripts[i].getAttribute("require-module");
+            if (module != undefined && module != "") {
+                require([ module ], function(Lib) {
+                    Lib.init();
+                });
+                break;
+            }
+        }
+    });
+});
+
+
+
 

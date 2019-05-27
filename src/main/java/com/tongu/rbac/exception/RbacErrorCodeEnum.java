@@ -15,7 +15,11 @@ public enum RbacErrorCodeEnum{
 	FILE_DOWNLOAD_FAILURE(1000004, "dowload file error"),
 	CREATE_QR_CODE_FAILURE(1000005, "create qr code failure"),
 	USER_EXISTS(1000005, "用户已经存在"),
-	USER_NOT_EXISTS(1000006, "用户不存在")
+	USER_NOT_EXISTS(1000006, "用户不存在"),
+	ROLE_EXISTS(1000007, "角色已经存在"),
+	ROLE_NOT_EXISTS(1000008, "角色不存在"),
+	MENU_EXISTS(1000009, "菜单已经存在"),
+	MENU_NOT_EXISTS(1000010, "菜单不存在"),
     ;
 	
 	@Getter
