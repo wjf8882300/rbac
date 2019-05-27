@@ -34,7 +34,8 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
 						menuUrl:$("#menuURL").val(),
 						parentId:$("#parentId_val").val(),
 						menuIcon:$("#menuIcon").val(),
-						isEnabled:$('input[name="isEnabled"]:checked').val(),
+                        isEnabled:$('input[name="isEnabled"]:checked').val(),
+                        menuType:$('input[name="menuType"]:checked').val(),
 						menuDesc:$("#menuDesc").val()
 					 }, function(data) {
 						 Common.successMsg("保存成功");
@@ -59,8 +60,9 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
             textField: 'menuName',
             treeLeafOnly: false,
             tree: { url: Constant.menu.queryAll, 
-            	    parms:{user:"1", start:1, length:1000}, 
-            	    ajaxContentType:"application/json", 
+                    parms:{user:"1", page:0, size:1000},
+                    ajaxType: 'get', 
+            	    //ajaxContentType:"application/json", 
             	    checkbox: false, 
             	    idField:'id', 
             	    parentIDField: 'parentId',
@@ -74,7 +76,7 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
     	var dialogData = dialog.get("data");//获取data参数
 		if(dialogData.name === "update") {
 			Common.queryById(Constant.menu.queryById + dialogData.id, {}, function(data) {
-				var menu = data.result.data;
+				var menu = data.data;
 				$("#menuName").val(menu.menuName);
 				$("#menuFlag").val(menu.menuFlag);
 				$("#menuURL").val(menu.menuUrl);
@@ -84,7 +86,8 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
 				if(menu.parentId !== "0") {
 					parentId.setValue(menu.parentId);
 				}				
-				$('input:radio[name="isEnabled"][value="'+menu.isEnabled+'"]').prop('checked', true);
+                $('input:radio[name="isEnabled"][value="'+menu.isEnabled+'"]').prop('checked', true);
+                $('input:radio[name="menuType"][value="'+menu.menuType+'"]').prop('checked', true);
 				$.uniform.update();
 			});
 		}

@@ -1,6 +1,7 @@
 package com.tongu.rbac.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class MenuController extends BaseController{
 	
 	@PostMapping("/save")
 	public @ResponseBody RespData<Object> saveMenu(@RequestBody MenuEntity menu){
+		menu.setBasicModelProperty(getUser().getId(), Objects.isNull(menu.getId()) ? true : false);
 		menuService.saveMenu(menu);
 		return success();
 	}
@@ -75,7 +77,7 @@ public class MenuController extends BaseController{
 	}
 	
 	@GetMapping("/query")
-	public @ResponseBody RespData<Page<MenuEntity>> queryAll(@RequestBody MenuEntity entity, @PageableDefault(sort = { "create_date" }, direction = Sort.Direction.DESC)Pageable page){
+	public @ResponseBody RespData<Page<MenuEntity>> queryAll(MenuEntity entity, @PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC)Pageable page){
 		return success(menuService.queryAll(entity, page));
 	}
 	

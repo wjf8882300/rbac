@@ -401,16 +401,7 @@
                 success: function (data)
                 {
                     if (!data) return;
-                    if(data.result.hasOwnProperty("success")) {
-                		if(data.result.hasOwnProperty("data")){
-                			if(data.result.data.hasOwnProperty("data")) {
-                				data = data.result.data.data;
-                			}
-                			else {
-                				data = data.result.data;
-                			}
-                		}               		
-                	}  
+                    data = data.data.content;
                     if (p.idField && p.parentIDField)
                     {
                         data = g.arrayToTree(data, p.idField, p.parentIDField);

@@ -54,7 +54,7 @@ public class MenuEntity extends BaseEntity  {
 	private String isEnabled;
 	
 	/**
-	 * 
+	 * 菜单类型：01-菜单/02-按钮
 	 */
 	private String menuType;
 	

@@ -2,7 +2,8 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	var grid = null;
 	var init = function() {
 		grid =$("#maingrid4").ligerGrid({
-			checkbox:true,
+            checkbox:true,
+            method: 'get',
 			columns:[
 			     { display: '角色名称', name:'roleName'},
 			     { display: '是否启用', name:'recordStatus'},
@@ -11,12 +12,12 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 			],
 			url:Constant.role.queryAll,
 			parms:null,
-	        contentType:"application/json",
-	        root:"data",
-	        record:"iTotalDisplayRecords",
+	        //contentType:"application/json",
+	        root:"content",
+	        record:"totalElements",
 	        rownumbers:false,
-	        pageParmName:"start",
-	        pagesizeParmName:"length",
+	        pageParmName:"page",
+	        pagesizeParmName:"size",
 	        page:0,
 	        pageSize:10,
 	        width: '100%',
@@ -89,9 +90,9 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 				var delList = [];
 				$.each(Common.gridCheck.checkedCustomer, function(i, item)
 	            {
-					delList.push({id:item});
+					delList.push(item);
 	            });
-				Common.saveData(Constant.role.del, {delList:delList}, function(data){
+				Common.saveData(Constant.role.del, delList, function(data){
 					Common.successMsg("删除成功");
 					Common.gridCheck.checkedCustomer.splice(0, Common.gridCheck.checkedCustomer.length);
 					$("#maingrid4").ligerGrid("reload");
@@ -102,7 +103,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 
 	$("#bntSearch").click(function()
 	{
-		grid.setParm("loginName", $("#username").val());
+		grid.setParm("roleName", $("#username").val());
 		grid.loadData(grid.url);
 	});
 	

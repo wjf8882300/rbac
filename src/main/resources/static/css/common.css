@@ -22,3 +22,29 @@
 .mylayout {
 	background-color: #ffffff;
 }
+
+body{
+    background-color: #ffffff;
+}
+	
+#wrapper{
+    position: relative;
+    margin: 0;
+        padding: 8px 20px 0px; 
+    -webkit-transform: translate3d(0, 0, 0); 
+    -moz-transform: translate3d(0, 0, 0); 
+    -ms-transform: translate3d(0, 0, 0); 
+    transform: translate3d(0, 0, 0); 
+    -webkit-backface-visibility: hidden; 
+    -moz-backface-visibility: hidden; 
+    -ms-backface-visibility: hidden; 
+    backface-visibility: hidden; 
+    
+    -webkit-perspective: 1000; 
+    -moz-perspective: 1000; 
+    -ms-perspective: 1000; 
+    perspective: 1000;
+    
+    overflow-x: hidden; 
+    overflow-y: hidden;
+}

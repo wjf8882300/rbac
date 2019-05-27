@@ -77,16 +77,16 @@ define(["jquery", "ligerui.ligerDialog"], function($){
 	    var queryList = function(url, param, callback) {
 	    	// 加载用户数据
 	    	$.ajax({ 
-	    	  type:"post", 
+	    	  type:"get", 
 	    	  url:url, 
-	    	  contentType:"application/json",              
+	    	  //contentType:"application/json",              
 	    	  dataType:"json",  
-	    	  data:JSON.stringify(param), 
+              //data:JSON.stringify(param),
+              data: param, 
 	    	  cache:false,  
 	    	  success:function(data){ 
-	    	    //console.log("data=",data.result.data);
-	    	  	if(data.result.hasOwnProperty("error")) {
-	    	  		errorMsg(data.result.message);
+	    	  	if(data.code != 200) {
+	    	  		errorMsg(data.msg);
 	    	  	}
 	    	  	else {
 	    	  		if(callback) {
@@ -117,9 +117,8 @@ define(["jquery", "ligerui.ligerDialog"], function($){
 	    	  data:JSON.stringify(param), 
 	    	  cache:false,  
 	    	  success:function(data){ 
-	    	    //console.log("data=",data.result);
-	    	  	if(data.result.hasOwnProperty("error")) {
-	    	  		errorMsg(data.result.message);
+	    	  	if(data.code != 200) {
+	    	  		errorMsg(data.msg);
 	    	  	}
 	    	  	else {
 	    	  		if(callback) {
@@ -142,16 +141,16 @@ define(["jquery", "ligerui.ligerDialog"], function($){
 	    var queryById = function(url, param, callback) {
 	    	// 加载用户数据
 	    	$.ajax({ 
-	    	  type:"post", 
+	    	  type:"get", 
 	    	  url:url, 
-	    	  contentType:"application/json",              
+	    	  //contentType:"application/json",              
 	    	  dataType:"json",  
-	    	  data:JSON.stringify(param), 
+              //data:JSON.stringify(param),
+              data: param, 
 	    	  cache:false,  
 	    	  success:function(data){ 
-	    	   //console.log("data=",data.result);
-	    	  	if(data.result.hasOwnProperty("error")) {
-	    	  		errorMsg(data.result.message);
+	    	  	if(data.code != 200) {
+	    	  		errorMsg(data.msg);
 	    	  	}
 	    	  	else {
 	    	  		if(callback) {

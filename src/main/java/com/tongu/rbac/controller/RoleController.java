@@ -1,6 +1,7 @@
 package com.tongu.rbac.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,13 @@ public class RoleController extends BaseController{
 	 * @return ResultVo
 	 */
 	@GetMapping(value="/query")
-	public @ResponseBody RespData<Page<RoleEntity>> queryAll(@RequestBody RoleEntity entity, @PageableDefault(sort = { "create_date" }, direction = Sort.Direction.DESC)Pageable page){
+	public @ResponseBody RespData<Page<RoleEntity>> queryAll(RoleEntity entity, @PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC)Pageable page){
 		return success(roleService.queryAll(entity, page));
 	}
 	
 	@PostMapping("/save")
 	public @ResponseBody RespData<Object> saveRole(@RequestBody RoleEntity entity){
+		entity.setBasicModelProperty(getUser().getId(), Objects.isNull(entity.getId()) ? true : false);
 		roleService.saveRole(entity);
 		return success();
 	}

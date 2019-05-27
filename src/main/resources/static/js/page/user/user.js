@@ -18,7 +18,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        url:Constant.user.queryAll,
 	        parms:null,
 	        //contentType:"application/json",
-	        root:"data",
+	        root:"content",
 	        record:"totalElements",
 	        rownumbers:false,
 	        pageParmName:"page",
@@ -28,6 +28,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        width: '100%',
 	        height:'97%',
 	        onSuccess:function(data, grid) {
+                data = data.data;
 	        	Common.gridCheck.checkedCustomer = [];
 	        },
 			onCheckRow: Common.gridCheck.f_onCheckRow, 
@@ -95,9 +96,9 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 				var delList = [];
 				$.each(Common.gridCheck.checkedCustomer, function(i, item)
 	            {
-					delList.push({id:item});
+					delList.push(item);
 	            });
-				Common.saveData(Constant.user.del, {delList:delList}, function(data){
+				Common.saveData(Constant.user.del, delList, function(data){
 					Common.successMsg("删除成功");
 					Common.gridCheck.checkedCustomer.splice(0, Common.gridCheck.checkedCustomer.length);
 					$("#maingrid4").ligerGrid("reload");

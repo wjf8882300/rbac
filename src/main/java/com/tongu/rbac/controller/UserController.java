@@ -1,5 +1,6 @@
 package com.tongu.rbac.controller;
 
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,67 +25,69 @@ import com.tongu.rbac.model.bo.GrantRoleBO;
 import com.tongu.rbac.model.entity.UserEntity;
 import com.tongu.rbac.service.UserService;
 
-/**   
+/**
  * 用户管理
- *  
- * @author  wangjf
- * @version $Revision:1.0.0, $Date: 2016年5月16日 下午2:39:30 $ 
+ * 
+ * @author wangjf
+ * @version $Revision:1.0.0, $Date: 2016年5月16日 下午2:39:30 $
  */
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController{
-	
+public class UserController extends BaseController {
+
 	@Autowired
 	private UserService userService;
-	
-	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = {"", "/list"}, method = RequestMethod.GET)
+
+	@Secured({ "ROLE_ADMIN" })
+	@RequestMapping(value = { "", "/list" }, method = RequestMethod.GET)
 	public String list(Model model) {
-	
+
 		return "/user/list";
 	}
-	
-	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
+
+	@Secured({ "ROLE_ADMIN" })
+	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
 	public String detail(Model model) {
-	
+
 		return "/user/detail";
 	}
-	
-	@Secured({"ROLE_ADMIN"})
-	@RequestMapping(value = {"/grant"}, method = RequestMethod.GET)
+
+	@Secured({ "ROLE_ADMIN" })
+	@RequestMapping(value = { "/grant" }, method = RequestMethod.GET)
 	public String grant(Model model) {
-	
+
 		return "/user/grant";
 	}
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({ "ROLE_ADMIN" })
 	@GetMapping("/query")
-	public @ResponseBody RespData<Page<UserEntity>> queryAllUser(@RequestParam(required = false) UserEntity entity, @PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC)Pageable page) {
+	public @ResponseBody RespData<Page<UserEntity>> queryAllUser(UserEntity entity,
+			@PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC) Pageable page) {
 		return success(userService.queryAll(entity, page));
 	}
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({ "ROLE_ADMIN" })
 	@PostMapping("/save")
 	public @ResponseBody RespData<Object> saveUser(@RequestBody UserEntity entity) {
+		entity.setBasicModelProperty(getUser().getId(), Objects.isNull(entity.getId()) ? true : false);
 		userService.saveUser(entity);
 		return success();
 	}
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({ "ROLE_ADMIN" })
 	@GetMapping("/query/{id}")
-	public @ResponseBody RespData<UserEntity> queryById(@PathVariable("id")String id) {
+	public @ResponseBody RespData<UserEntity> queryById(@PathVariable("id") String id) {
 		return success(userService.queryById(id));
 	}
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({ "ROLE_ADMIN" })
 	@PostMapping("/delete")
 	public @ResponseBody RespData<Object> deleteUser(@RequestBody Set<String> ids) {
 		userService.deleteUser(ids);
 		return success();
 	}
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({ "ROLE_ADMIN" })
 	@PostMapping("/grant/role")
 	public @ResponseBody RespData<Object> grantRole(@RequestBody GrantRoleBO grantRole) {
 		userService.grantRole(grantRole);

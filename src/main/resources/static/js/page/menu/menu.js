@@ -6,7 +6,8 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 		 * 记载列表
 		 */
 		grid = $("#maingrid4").ligerGrid({
-	        checkbox: true,
+            checkbox: true,
+            method: 'get',
 	        columns: [
 	        { display: '菜单名称', name: 'menuName', id:'menuName'},
 	        { display: '菜单标识', name: 'menuFlag', id: 'menuFlag'},
@@ -16,12 +17,12 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        ], 
 	        url:Constant.menu.queryAll,
 	        parms:null,
-	        contentType:"application/json",
-	        root:"data",
-	        record:"iTotalDisplayRecords",
+	        //contentType:"application/json",
+	        root:"content",
+	        record:"totalElements",
 	        rownumbers:false,
-	        pageParmName:"start",
-	        pagesizeParmName:"length",
+	        pageParmName:"page",
+	        pagesizeParmName:"size",
 	        page:0,
 	        pageSize:10,
 	        width: '100%',
@@ -43,7 +44,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	$("#bntAdd").click(function()
 	{
 	    $.ligerDialog.open({
-	        height:535,
+	        height:585,
 	        width: 700,
 	        title : '新增菜单',
 	        url: Constant.menu.detail, 
@@ -70,7 +71,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 		}
 		
 	    $.ligerDialog.open({
-	        height:535,
+	        height:585,
 	        width: 700,
 	        title : '编辑菜单',
 	        url: Constant.menu.detail, 
@@ -100,9 +101,9 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 				var delList = [];
 				$.each(Common.gridCheck.checkedCustomer, function(i, item)
 	            {
-					delList.push({id:item});
+					delList.push(item);
 	            });
-				Common.saveData(Constant.menu.del, {delList:delList}, function(data){
+				Common.saveData(Constant.menu.del, delList, function(data){
 					Common.successMsg("删除成功");
 					Common.gridCheck.checkedCustomer.splice(0, Common.gridCheck.checkedCustomer.length);
 					$("#maingrid4").ligerGrid("reload");

@@ -7,6 +7,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,6 @@ public class MenuServiceImpl implements MenuService {
 			}
 			menuEntity.setMenuLevel(parentMenuEntity.get().getMenuLevel() + 1);
 		}
-		menuEntity.setMenuType(Constant.MENU_TYPE_01);
 		menuRepository.save(menuEntity);
 	}
 
@@ -69,7 +69,9 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public Page<MenuEntity> queryAll(MenuEntity entity, Pageable page) {
-		Page<MenuEntity> pageList = menuRepository.findAll(Example.of(entity), page);
+		ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("menuName", ExampleMatcher.GenericPropertyMatchers.contains());
+		Example<MenuEntity> example = Example.of(Optional.ofNullable(entity).orElse(new MenuEntity()), matcher);
+		Page<MenuEntity> pageList = menuRepository.findAll(example, page);
 		return pageList;
 	}
 

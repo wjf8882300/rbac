@@ -42,7 +42,7 @@ define(["jquery", "Common", "Constant", "jquery.validate", "messages_cn", "liger
     	var dialogData = dialog.get("data");//获取data参数
 		if(dialogData.name === "update") {
 			Common.queryById(Constant.role.queryById + dialogData.id, {}, function(data) {
-				var role = data.result.data;
+				var role = data.data;
 				$("#roleName").val(role.roleName);
 				$("#roleKey").val(role.roleKey);
 				$("#roleDesc").val(role.roleDesc);

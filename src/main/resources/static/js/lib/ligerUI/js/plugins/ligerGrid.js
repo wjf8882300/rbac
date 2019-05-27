@@ -871,6 +871,7 @@
                 },
                 success: function (data)
                 {
+                    data = data.data;
                     g.trigger('success', [data, g]);
                     if (!data || !data[p.root] || !data[p.root].length)
                     {
