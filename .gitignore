@@ -96,3 +96,4 @@ Icon
 *_copy.htm
 *_copy.html
 *.pdb
+src/main/resources/application.yml
