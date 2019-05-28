@@ -140,23 +140,4 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
-//    
-//    @Bean
-//    GrantedAuthorityDefaults grantedAuthorityDefaults() {
-//        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
-//    }
-//    
-//    @Bean
-//    public DefaultMethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler() {
-//        DefaultMethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler = new DefaultMethodSecurityExpressionHandler();
-//        defaultMethodSecurityExpressionHandler.setDefaultRolePrefix("");
-//        return defaultMethodSecurityExpressionHandler;
-//    }
-//
-//    @Bean
-//    public DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler() {
-//        DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new DefaultWebSecurityExpressionHandler();
-//        defaultWebSecurityExpressionHandler.setDefaultRolePrefix("");
-//        return defaultWebSecurityExpressionHandler;
-//    }
 }
