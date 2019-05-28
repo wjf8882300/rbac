@@ -46,7 +46,7 @@ out/
 *.pydevproject
 .project
 .metadata
-#bin/**
+bin/**
 tmp/**
 tmp/**/*
 *.tmp
@@ -97,3 +97,4 @@ Icon
 *_copy.html
 *.pdb
 src/main/resources/application.yml
+/src/main/resources/application.yml
