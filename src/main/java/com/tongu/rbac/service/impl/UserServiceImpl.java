@@ -23,6 +23,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.tongu.rbac.constant.Constant;
 import com.tongu.rbac.exception.RbacErrorCodeEnum;
 import com.tongu.rbac.exception.RbacException;
 import com.tongu.rbac.model.bo.GrantRoleBO;
@@ -96,6 +97,9 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteUser(Set<String> ids) {
+		if(ids.contains(Constant.SUPPER_ADMIN_ID)) {
+			throw new RbacException(RbacErrorCodeEnum.SUPER_USER_CANNOT_DELETE); 
+		}
 		userRoleRepository.batchDeleteByUserId(ids);
 		userRepository.batchDelete(ids);
 	}

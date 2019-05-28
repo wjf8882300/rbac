@@ -6,6 +6,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Sets;
+import com.tongu.rbac.constant.Constant;
 import com.tongu.rbac.constant.StatusEnum;
 import com.tongu.rbac.model.entity.MenuEntity;
 import com.tongu.rbac.model.entity.UserEntity;
@@ -53,8 +56,16 @@ public class WebUserDetailsService implements UserDetailsService {
 			}
 			
 			// 设置用户权限
-			Set<GrantedAuthority> auths = Sets.newConcurrentHashSet();			
-			List<MenuEntity> menuList = menuService.queryByUserId(userEntity.getId());
+			Set<GrantedAuthority> auths = Sets.newConcurrentHashSet();		
+			List<MenuEntity> menuList = null;
+			if(Constant.SUPPER_ADMIN_ID.equals(userEntity.getId())) { 
+				// 超级管理员赋予所有权限
+				Page<MenuEntity> page = menuService.queryAll(null, PageRequest.of(0, 1000));
+				menuList = page.getContent();
+			} else {
+				menuList = menuService.queryByUserId(userEntity.getId());
+			}
+			
 			for(MenuEntity r : menuList) {
 				auths.add(new SimpleGrantedAuthority(r.getMenuFlag()));
 			}

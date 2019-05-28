@@ -30,7 +30,7 @@ public class LoginLogEntity extends BaseEntity  {
 
 
 
-	@Column(name = "ROLE_ID", length = 22)
+	@Column(name = "USER_ID", length = 36)
 	public String getUserId() {
 		return this.userId;
 	}
@@ -39,7 +39,7 @@ public class LoginLogEntity extends BaseEntity  {
 		this.userId = userId;
 	}
 
-	@Column(name = "MENU_ID", length = 50)
+	@Column(name = "IP_ADDRESS", length = 50)
 	public String getIpAddress() {
 		return this.ipAddress;
 	}

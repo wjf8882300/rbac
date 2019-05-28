@@ -87,8 +87,8 @@ public class RoleController extends BaseController{
 		return success();
 	}
 	
-	@PostMapping("/query/by/user/{userId}")
-	public @ResponseBody List<RoleEntity> queryByUserId(@PathVariable("userId")String userId){
-		return roleService.queryByUserId(userId);
+	@GetMapping("/query/by/user/{userId}")
+	public @ResponseBody RespData<List<RoleEntity>> queryByUserId(@PathVariable("userId")String userId){
+		return success(roleService.queryByUserId(userId));
 	}
 }

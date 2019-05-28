@@ -38,7 +38,7 @@ public interface RoleMenuRepository extends Repository<RoleMenuEntity, String>, 
 	@Query("select A from MenuEntity A where A.id in ("
 			+ "select B.menuId from RoleMenuEntity B where B.roleId in ("
 			+ "select C.roleId from UserRoleEntity C where C.userId = :userId)"
-			+ ")")
+			+ ") and A.isEnabled = '0'")
 	public List<MenuEntity> findByUserId(@Param("userId") String userId);
 	
 	/**

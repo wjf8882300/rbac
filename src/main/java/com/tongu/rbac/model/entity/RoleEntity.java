@@ -46,7 +46,7 @@ public class RoleEntity extends BaseEntity  {
 	@Transient
 	private List<MenuEntity> menuList = Lists.newArrayList();
 
-	@Column(name = "ROLE_NAME", length = 50)
+	@Column(name = "ROLE_NAME", length = 255)
 	public String getRoleName() {
 		return this.roleName;
 	}
@@ -55,7 +55,7 @@ public class RoleEntity extends BaseEntity  {
 		this.roleName = roleName;
 	}
 
-	@Column(name = "ROLE_DESC", length = 250)
+	@Column(name = "ROLE_DESC", length = 255)
 	public String getRoleDesc() {
 		return this.roleDesc;
 	}

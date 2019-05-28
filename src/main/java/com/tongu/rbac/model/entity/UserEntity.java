@@ -58,7 +58,7 @@ public class UserEntity extends BaseEntity  {
 	@Transient
 	private List<RoleEntity> roleList = new ArrayList<RoleEntity>();
 
-	@Column(name = "CUST_NAME", length = 50)
+	@Column(name = "CUST_NAME", length = 255)
 	public String getCustName() {
 		return this.custName;
 	}
@@ -67,7 +67,7 @@ public class UserEntity extends BaseEntity  {
 		this.custName = custName;
 	}
 
-	@Column(name = "LOGIN_NAME", length = 50)
+	@Column(name = "LOGIN_NAME", length = 255)
 	public String getLoginName() {
 		return this.loginName;
 	}
@@ -76,7 +76,7 @@ public class UserEntity extends BaseEntity  {
 		this.loginName = loginName;
 	}
 
-	@Column(name = "LOGIN_PASSWORD", length = 50)
+	@Column(name = "LOGIN_PASSWORD", length = 255)
 	public String getLoginPassword() {
 		return this.loginPassword;
 	}

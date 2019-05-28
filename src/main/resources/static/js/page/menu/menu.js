@@ -23,7 +23,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        { display: '菜单地址', name: 'menuUrl', id: 'menuUrl'}, 
 	        { display: '是否启用', name: 'isEnabled', id: 'isEnabled', 
                 render:function(row){
-                    if(row.isEnabled=='01'){
+                    if(row.isEnabled=='0'){
                         return '启用';
                     } else {
                         return '禁用';
@@ -40,7 +40,8 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        pageParmName:"page",
 	        pagesizeParmName:"size",
 	        page:0,
-	        pageSize:10,
+            pageSize:1000,
+            pageSizeOptions: [100, 200, 500, 1000],
 	        width: '100%',
 	        height:'97%',
 	        onSuccess:function(data, grid) {

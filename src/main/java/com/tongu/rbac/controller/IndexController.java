@@ -30,7 +30,6 @@ public class IndexController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@Secured("ROLE_SYSTEM")
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		//加载菜单

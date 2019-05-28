@@ -68,7 +68,7 @@ public class MenuEntity extends BaseEntity  {
 	 */
 	private Integer menuSort; 
 
-	@Column(name = "MENU_NAME", length = 50)
+	@Column(name = "MENU_NAME", length = 255)
 	public String getMenuName() {
 		return this.menuName;
 	}
@@ -77,7 +77,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuName = menuName;
 	}
 
-	@Column(name = "MENU_DESC", length = 250)
+	@Column(name = "MENU_DESC", length = 500)
 	public String getMenuDesc() {
 		return this.menuDesc;
 	}
@@ -86,7 +86,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuDesc = menuDesc;
 	}
 
-	@Column(name = "MENU_LEVEL", length = 50)
+	@Column(name = "MENU_LEVEL", length = 4)
 	public Integer getMenuLevel() {
 		return menuLevel;
 	}
@@ -104,7 +104,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuFlag = menuFlag;
 	}
 
-	@Column(name = "MENU_URL", length = 256)
+	@Column(name = "MENU_URL", length = 255)
 	public String getMenuUrl() {
 		return menuUrl;
 	}
@@ -113,7 +113,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuUrl = menuUrl;
 	}
 
-	@Column(name = "PARENT_ID", length = 50)
+	@Column(name = "PARENT_ID", length = 36)
 	public String getParentId() {
 		return parentId;
 	}
@@ -131,7 +131,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuIcon = menuIcon;
 	}
 
-	@Column(name = "IS_ENABLED", length = 50)
+	@Column(name = "IS_ENABLED", length = 1)
 	public String getIsEnabled() {
 		return isEnabled;
 	}
@@ -140,7 +140,7 @@ public class MenuEntity extends BaseEntity  {
 		this.isEnabled = isEnabled;
 	}
 
-	@Column(name = "MENU_TYPE", length = 50)
+	@Column(name = "MENU_TYPE", length = 2)
 	public String getMenuType() {
 		return menuType;
 	}
@@ -149,7 +149,7 @@ public class MenuEntity extends BaseEntity  {
 		this.menuType = menuType;
 	}
 
-	@Column(name = "MENU_SORT", length = 11)
+	@Column(name = "MENU_SORT", length = 4)
 	public Integer getMenuSort() {
 		return menuSort;
 	}

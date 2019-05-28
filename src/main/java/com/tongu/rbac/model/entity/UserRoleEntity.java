@@ -30,7 +30,7 @@ public class UserRoleEntity extends BaseEntity  {
 
 
 
-	@Column(name = "USER_ID", length = 22)
+	@Column(name = "USER_ID", length = 36)
 	public String getUserId() {
 		return this.userId;
 	}
@@ -39,7 +39,7 @@ public class UserRoleEntity extends BaseEntity  {
 		this.userId = userId;
 	}
 
-	@Column(name = "ROLE_ID", length = 22)
+	@Column(name = "ROLE_ID", length = 36)
 	public String getRoleId() {
 		return this.roleId;
 	}

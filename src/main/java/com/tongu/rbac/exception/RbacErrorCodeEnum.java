@@ -20,6 +20,7 @@ public enum RbacErrorCodeEnum{
 	ROLE_NOT_EXISTS(1000008, "角色不存在"),
 	MENU_EXISTS(1000009, "菜单已经存在"),
 	MENU_NOT_EXISTS(1000010, "菜单不存在"),
+	SUPER_USER_CANNOT_DELETE(1000011, "超级管理员不允许删除"),
     ;
 	
 	@Getter

@@ -30,7 +30,7 @@ public class RoleMenuEntity extends BaseEntity  {
 
 
 
-	@Column(name = "ROLE_ID", length = 22)
+	@Column(name = "ROLE_ID", length = 36)
 	public String getRoleId() {
 		return this.roleId;
 	}
@@ -39,7 +39,7 @@ public class RoleMenuEntity extends BaseEntity  {
 		this.roleId = roleId;
 	}
 
-	@Column(name = "MENU_ID", length = 22)
+	@Column(name = "MENU_ID", length = 36)
 	public String getMenuId() {
 		return this.menuId;
 	}

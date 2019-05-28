@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.tongu.rbac.constant.Constant;
+import com.tongu.rbac.constant.StatusEnum;
 import com.tongu.rbac.exception.RbacErrorCodeEnum;
 import com.tongu.rbac.exception.RbacException;
 import com.tongu.rbac.model.entity.MenuEntity;
@@ -62,6 +63,7 @@ public class MenuServiceImpl implements MenuService {
 			menuEntity = exists;
 		}
 
+		String parentId = Constant.MENU_ROOT_ID;
 		if(StringUtils.isEmpty(menuEntity.getParentId()) || Constant.MENU_ROOT_ID.equals(menuEntity.getParentId())) { // 父级是根目录
 			menuEntity.setMenuLevel(1);
 			menuEntity.setParentId("0");
@@ -72,7 +74,13 @@ public class MenuServiceImpl implements MenuService {
 				throw new RbacException("所选父级菜单不存在");
 			}
 			menuEntity.setMenuLevel(parentMenuEntity.get().getMenuLevel() + 1);
+			parentId = parentMenuEntity.get().getId();
 		}
+		
+		MenuEntity sort = new MenuEntity();
+		sort.setParentId(parentId);
+		List<MenuEntity> sorts = menuRepository.findAll(Example.of(sort));
+		menuEntity.setMenuSort(sorts.size() + 1);
 		menuRepository.save(menuEntity);
 	}
 
@@ -91,7 +99,10 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Page<MenuEntity> queryAll(MenuEntity entity, Pageable page) {
 		ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("menuName", ExampleMatcher.GenericPropertyMatchers.contains());
-		Example<MenuEntity> example = Example.of(Optional.ofNullable(entity).orElse(new MenuEntity()), matcher);
+		entity = Optional.ofNullable(entity).orElse(new MenuEntity());
+		entity.setRecordStatus(StatusEnum.ENABLED.getValue());
+		entity.setIsEnabled(StatusEnum.ENABLED.getValue());
+		Example<MenuEntity> example = Example.of(entity, matcher);
 		Page<MenuEntity> pageList = menuRepository.findAll(example, page);
 		return pageList;
 	}

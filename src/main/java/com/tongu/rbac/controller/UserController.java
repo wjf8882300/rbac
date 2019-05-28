@@ -37,35 +37,30 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@Secured({ "ROLE_USER_LIST" })
 	@RequestMapping(value = { "", "/list" }, method = RequestMethod.GET)
 	public String list(Model model) {
 
 		return "/user/list";
 	}
 
-	@Secured({ "ROLE_USER_DETAIL" })
 	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
 	public String detail(Model model) {
 
 		return "/user/detail";
 	}
 
-	@Secured({ "ROLE_USER_GRANT" })
 	@RequestMapping(value = { "/grant" }, method = RequestMethod.GET)
 	public String grant(Model model) {
 
 		return "/user/grant";
 	}
 
-	@Secured({ "ROLE_USER_LIST" })
 	@GetMapping("/query")
 	public @ResponseBody RespData<Page<UserEntity>> queryAllUser(UserEntity entity,
 			@PageableDefault(sort = { "createDate" }, direction = Sort.Direction.DESC) Pageable page) {
 		return success(userService.queryAll(entity, page));
 	}
 
-	@Secured({ "ROLE_USER_INSERT", "ROLE_USER_UPDATE" })
 	@PostMapping("/save")
 	public @ResponseBody RespData<Object> saveUser(@RequestBody UserEntity entity) {
 		entity.setBasicModelProperty(getUser().getId(), Objects.isNull(entity.getId()) ? true : false);
@@ -73,22 +68,20 @@ public class UserController extends BaseController {
 		return success();
 	}
 
-	@Secured({ "ROLE_USER_DETAIL" })
 	@GetMapping("/query/{id}")
 	public @ResponseBody RespData<UserEntity> queryById(@PathVariable("id") String id) {
 		return success(userService.queryById(id));
 	}
 
-	@Secured({ "ROLE_USER_DELETE" })
 	@PostMapping("/delete")
 	public @ResponseBody RespData<Object> deleteUser(@RequestBody Set<String> ids) {
 		userService.deleteUser(ids);
 		return success();
 	}
 
-	@Secured({ "ROLE_USER_GRANT_ROLE" })
 	@PostMapping("/grant/role")
 	public @ResponseBody RespData<Object> grantRole(@RequestBody GrantRoleBO grantRole) {
+		grantRole.setUpdateUserId(getUser().getId());
 		userService.grantRole(grantRole);
 		return success();
 	}

@@ -89,7 +89,36 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        }
 	    });
 	    
-	}); 
+    }); 
+    
+    $("#bntPermissions").click(function()
+	{
+		if(Common.gridCheck.checkedCustomer.length == 0) {
+			Common.warnMsg("分配角色时必须至少选中一行");
+			return;
+		}
+		else if(Common.gridCheck.checkedCustomer.length > 1) {
+			Common.warnMsg("分配角色时不能选中多行");
+			return;
+		}
+		
+	    $.ligerDialog.open({
+	        height:398,
+	        width: 700,
+	        title : '分配角色',
+	        url: Constant.user.grant, 
+	        showMax: false, 
+	        showToggle: true,
+	        showMin: false,
+	        isResize: true,
+	        slide: false,
+	        data: {
+	            name: "grant",
+	            id:Common.gridCheck.checkedCustomer[0]
+	        }
+	    });
+	    
+	});
 				
 
 	$("#bntDelete").click(function()

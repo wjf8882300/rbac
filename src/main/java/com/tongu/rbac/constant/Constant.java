@@ -11,4 +11,7 @@ public class Constant {
 	public final static String MENU_TYPE_01 = "菜单";
 	/******菜单类型--按钮******/  
 	public final static String MENU_TYPE_02 = "按钮";
+	
+	/******超级管理员ID******/  
+	public final static String SUPPER_ADMIN_ID = "1";
 }

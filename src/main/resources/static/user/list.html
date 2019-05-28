@@ -14,7 +14,7 @@
                   <div class="controls">
                     <label class="control-label">账号</label>
                     <input id="username" type="text" name="username" class="ui-wizard-content">
-                    <input id="bntSearch" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="button" value="查询">
+                    <input id="bntSearch" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="button" value="查询" sec:authorize="hasRole('ROLE_USER_SEARCH')">
                   </div>
                 </div>	
                 <div class="control-group">  

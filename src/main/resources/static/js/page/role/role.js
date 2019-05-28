@@ -27,7 +27,7 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	        pageParmName:"page",
 	        pagesizeParmName:"size",
 	        page:0,
-	        pageSize:10,
+	        pageSize:20,
 	        width: '100%',
 	        height:'97%',
 			onSuccess:function(data,grid){
@@ -117,6 +117,15 @@ define(["jquery", "Common", "Constant", "ligerui.ligerGrid"], function($, Common
 	
 	$("#bntPermissions").click(function()
 	{
+        if(Common.gridCheck.checkedCustomer.length == 0) {
+			Common.warnMsg("分配菜单时必须至少选中一行");
+			return;
+		}
+		else if(Common.gridCheck.checkedCustomer.length > 1) {
+			Common.warnMsg("分配菜单时不能选中多行");
+			return;
+		}
+
 	    $.ligerDialog.open({
 	        height:398,
 	        width: 700,

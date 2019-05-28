@@ -34,7 +34,7 @@ public abstract class BaseEntity implements java.io.Serializable {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Id
-	@Column(length = 50)
+	@Column(length = 36)
 	protected String id;
 
 	/** 创建时间 */
@@ -42,7 +42,7 @@ public abstract class BaseEntity implements java.io.Serializable {
 	protected Date createDate;
 
 	/** 创建人 */
-	@Column(length = 150)
+	@Column(length = 36)
 	protected String createUser;
 
 	/** 备注 */
@@ -50,7 +50,7 @@ public abstract class BaseEntity implements java.io.Serializable {
 	protected String memo;
 
 	/** 更新人 */
-	@Column(length = 150)
+	@Column(length = 36)
 	protected String lastUpdateUser;
 
 	/** 更新时间 */
