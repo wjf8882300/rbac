@@ -27,4 +27,6 @@ public interface MenuRepository extends Repository<MenuEntity, String>, JpaRepos
 	@Modifying
 	@Query("delete from MenuEntity A where A.id in (:ids)")
 	public int batchDelete(@Param("ids")Set<String> ids);
+	
+	public MenuEntity findTopByOrderByMenuCodeDesc();
 }

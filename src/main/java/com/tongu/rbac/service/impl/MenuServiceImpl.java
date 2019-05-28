@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import com.google.common.collect.Lists;
 import com.tongu.rbac.constant.Constant;
 import com.tongu.rbac.constant.StatusEnum;
 import com.tongu.rbac.exception.RbacErrorCodeEnum;
@@ -47,13 +51,16 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void saveMenu(MenuEntity menuEntity)  {		
 		if(Objects.isNull(menuEntity.getId())) {
+			// 新增
 			MenuEntity oldMenu = new MenuEntity();
 			oldMenu.setMenuName(menuEntity.getMenuName());
 			List<MenuEntity> existsList = menuRepository.findAll(Example.of(oldMenu));
 			if(!CollectionUtils.isEmpty(existsList)) {
 				throw new RbacException(RbacErrorCodeEnum.MENU_EXISTS);
 			}
+			
 		} else {
+			// 编辑
 			Optional<MenuEntity> optional = menuRepository.findById(menuEntity.getId());
 			if(!optional.isPresent()) {
 				throw new RbacException(RbacErrorCodeEnum.MENU_NOT_EXISTS);
@@ -62,11 +69,15 @@ public class MenuServiceImpl implements MenuService {
 			BeanUtil.copyPropertiesIgnoreNull(menuEntity, exists);
 			menuEntity = exists;
 		}
-
+		
+		MenuEntity max = menuRepository.findTopByOrderByMenuCodeDesc();
+		menuEntity.setMenuCode(String.format("%05d", Integer.valueOf(max.getMenuCode()) + 1));
+		
 		String parentId = Constant.MENU_ROOT_ID;
 		if(StringUtils.isEmpty(menuEntity.getParentId()) || Constant.MENU_ROOT_ID.equals(menuEntity.getParentId())) { // 父级是根目录
 			menuEntity.setMenuLevel(1);
 			menuEntity.setParentId("0");
+			menuEntity.setSearchCode("");
 		}
 		else {
 			Optional<MenuEntity> parentMenuEntity = menuRepository.findById(menuEntity.getParentId());
@@ -75,12 +86,16 @@ public class MenuServiceImpl implements MenuService {
 			}
 			menuEntity.setMenuLevel(parentMenuEntity.get().getMenuLevel() + 1);
 			parentId = parentMenuEntity.get().getId();
+			menuEntity.setSearchCode(parentMenuEntity.get().getSearchCode());
 		}
 		
 		MenuEntity sort = new MenuEntity();
 		sort.setParentId(parentId);
 		List<MenuEntity> sorts = menuRepository.findAll(Example.of(sort));
 		menuEntity.setMenuSort(sorts.size() + 1);
+		
+		menuEntity.setSearchCode(new StringBuilder().append(menuEntity.getSearchCode()).append("|").append(menuEntity.getMenuCode()).toString());
+
 		menuRepository.save(menuEntity);
 	}
 
@@ -103,7 +118,9 @@ public class MenuServiceImpl implements MenuService {
 		entity.setRecordStatus(StatusEnum.ENABLED.getValue());
 		entity.setIsEnabled(StatusEnum.ENABLED.getValue());
 		Example<MenuEntity> example = Example.of(entity, matcher);
-		Page<MenuEntity> pageList = menuRepository.findAll(example, page);
+		Sort sort = Sort.by(Order.asc("menuLevel"), Order.asc("menuSort"));
+		PageRequest pageRequest = PageRequest.of(page.getPageNumber(), page.getPageSize(), sort);
+		Page<MenuEntity> pageList = menuRepository.findAll(example, pageRequest);
 		return pageList;
 	}
 

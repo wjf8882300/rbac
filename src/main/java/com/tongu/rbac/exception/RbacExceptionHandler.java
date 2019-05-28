@@ -1,5 +1,6 @@
 package com.tongu.rbac.exception;
 
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,5 +27,11 @@ public class RbacExceptionHandler {
 	public BaseVO<String> processMatchException(Exception ex) {
 		log.warn("processMatchException {}", ex);
 		return new BaseVO<String>(500, ex.getMessage(), null);
+	}
+	
+	@ExceptionHandler(value = AuthenticationException.class)
+	public BaseVO<String> processMatchException(AuthenticationException ex) {
+		log.warn("processMatchException {}", ex);
+		return new BaseVO<String>(403, ex.getMessage(), null);
 	}
 }

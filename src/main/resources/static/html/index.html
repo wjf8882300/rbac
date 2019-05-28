@@ -28,7 +28,7 @@
     <!--sidebar-menu-->
     <div id="sidebar" class="sidebar">
         <ul th:each="item:${menuList }">
-                <li class="submenu" th:if="${item.menuLevel} eq '1' and ${item.menuType} eq '01'">
+                <li class="submenu open" th:if="${item.menuLevel} eq '1' and ${item.menuType} eq '01'">
                     <a href="#"><i th:attr="class='icon '+${item.menuIcon}"></i><span th:text="${item.menuName}"></span></a>
                     <b class="arrow fa fa-angle-down"></b>
                     <ul th:each="subItem:${menuList}">
@@ -47,7 +47,7 @@
         <!--main-container-part-->
         <div class="main-content">
             <div id="layout1" class="l-layout mylayout"
-                style="width: 99.2%; margin: 2px auto 0px; height: 446px;background-color: #ffffff;">
+                style="width: 99.2%; margin: 2px auto 0px; height: 896px;background-color: #ffffff;">
                 <div position="center" id="framecenter">
                 </div>
             </div>
@@ -56,9 +56,9 @@
     </div>
 
     <!--Footer-part-->
-    <div class="row-fluid">
+    <!-- <div class="row-fluid">
         <div id="footer" class="span12"> 2016 &copy; 锋锋科技</div>
-    </div>
+    </div> -->
     <!--end-Footer-part-->
     <script src="/js/lib/requirejs/require.js" require-module="page/index" data-main="/js/main.js"></script>
 </body>

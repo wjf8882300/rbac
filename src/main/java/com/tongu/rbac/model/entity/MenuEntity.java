@@ -3,6 +3,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  *  entity. @author Tools
@@ -67,6 +70,14 @@ public class MenuEntity extends BaseEntity  {
 	 * 
 	 */
 	private Integer menuSort; 
+	
+	@Getter
+	@Setter
+	private String menuCode;
+	
+	@Getter
+	@Setter
+	private String searchCode;
 
 	@Column(name = "MENU_NAME", length = 255)
 	public String getMenuName() {

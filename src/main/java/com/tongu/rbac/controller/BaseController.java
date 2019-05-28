@@ -1,5 +1,6 @@
 package com.tongu.rbac.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.tongu.rbac.model.RespData;
@@ -9,10 +10,13 @@ import com.tongu.rbac.security.WebUserDetails;
 public class BaseController {
 
 	public UserEntity getUser() {
-		Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(object != null && object instanceof WebUserDetails) {
-			WebUserDetails user = (WebUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			return user.getUser();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication != null) {
+			Object object = authentication.getPrincipal();
+			if(object != null && object instanceof WebUserDetails) {
+				WebUserDetails user = (WebUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				return user.getUser();
+			}
 		}
 		return null;
 	}

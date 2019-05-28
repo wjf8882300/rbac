@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,10 +14,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -26,6 +23,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import com.tongu.rbac.security.MyAuthenticationSuccessHandler;
 import com.tongu.rbac.security.SessionInformationExpiredStrategyImpl;
 import com.tongu.rbac.security.WebUserDetailsService;
 import com.tongu.rbac.util.DesUtil;
@@ -48,7 +46,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	
+	@Autowired
+	private MyAuthenticationSuccessHandler authenticationSuccessHandler;
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -81,32 +80,35 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().sameOrigin()
 		.and().csrf().disable()
         .authorizeRequests()
-        .antMatchers("/**", "/user/**", "/oauth/**", "/actuator/**", "/v2/api-docs").permitAll()
+        .antMatchers("/oauth/**", "/actuator/**", "/v2/api-docs", "/error/**", "/login/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()
         .loginPage("/login")
         .loginProcessingUrl("/login/form")
+        .successHandler(authenticationSuccessHandler)
         .failureUrl("/login?error")
+        //.defaultSuccessUrl("/index")
         .permitAll()
         .and()
         .sessionManagement()
         .invalidSessionUrl("/login")
         .maximumSessions(1)
-        .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl());
+        .expiredSessionStrategy(new SessionInformationExpiredStrategyImpl())
+        ;
     }
 
 	/*忽略静态资源*/
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/resources/static/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/html/**", "/img/**");
     }
     
     @Bean
     public SpringResourceTemplateResolver templateResolver(){
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         //配置模板
-        templateResolver.setPrefix("classpath:/static/");
+        templateResolver.setPrefix("classpath:/static/html/");
         templateResolver.setSuffix(".html");
         // 使用HTML的模式，也就是支持HTML5的方式，使用data-th-*的H5写法来写thymeleaf的标签语法
         templateResolver.setTemplateMode(TemplateMode.HTML);

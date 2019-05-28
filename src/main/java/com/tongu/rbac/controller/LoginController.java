@@ -57,8 +57,8 @@ public class LoginController extends BaseController{
 	
 	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(HttpServletRequest req, Model model) {
 		
-		return "login";
+		return login(req, model);
 	}
 }

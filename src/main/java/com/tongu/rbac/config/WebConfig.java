@@ -26,7 +26,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-
+	
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedMethods("GET","POST","PUT","PATCH","DELETE");
@@ -34,9 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
     
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-    	registry.addViewController("/info").setViewName("info");
-        registry.addViewController("/list").setViewName("list"); 
-        registry.addViewController("/qr").setViewName("qr"); 
+    	//registry.addViewController("/custom/error").setViewName("/error/error403");
     }
 
     @Bean
