@@ -46,7 +46,7 @@ public class LoginController extends BaseController{
 			if(exception instanceof BadCredentialsException) {
 				model.addAttribute("error", "用户名或者密码错误");
 			} else if(exception instanceof UsernameNotFoundException){
-				model.addAttribute("error", "该用户不存在");
+				model.addAttribute("error", "用户不存在");
 			} else {
 				model.addAttribute("error", exception.getMessage());
 			}

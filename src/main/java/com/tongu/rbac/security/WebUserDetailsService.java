@@ -74,7 +74,7 @@ public class WebUserDetailsService implements UserDetailsService {
 			return user;
 		}
 		else {
-			throw new BadCredentialsException("该用户不存在");
+			throw new BadCredentialsException("用户不存在");
 		}
 	}
 }
