@@ -1,7 +1,6 @@
 package com.tongu.rbac.service;
 
 import com.tongu.rbac.model.entity.LoginLogEntity;
-import com.tongu.rbac.model.vo.ResultVo;
 
 public interface LoginLogService {
 
@@ -11,5 +10,5 @@ public interface LoginLogService {
 	 * @param params
 	 * @return
 	 */
-	public ResultVo saveLoginLog(LoginLogEntity loginLogEntity);
+	public void saveLoginLog(LoginLogEntity loginLogEntity);
 }
