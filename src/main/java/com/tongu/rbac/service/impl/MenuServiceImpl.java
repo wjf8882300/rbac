@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.google.common.collect.Lists;
 import com.tongu.rbac.constant.Constant;
 import com.tongu.rbac.constant.StatusEnum;
 import com.tongu.rbac.exception.RbacErrorCodeEnum;
