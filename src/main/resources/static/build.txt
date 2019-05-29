@@ -236,6 +236,8 @@ js/lib/ligerUI/skins/Tab/css/tab.css
 
 js/main.js
 ----------------
+js/domReady.js
+domReady!
 js/main.js
 
 js/page/login.js

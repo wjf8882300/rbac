@@ -4,7 +4,7 @@
 require.config({
 	
     paths : {
-    	'domReady'				: 'lib/requirejs/domReady',
+    	'domReady'				: 'domReady',
         "jquery" 				: "lib/jquery/jquery-1.7.2.min",
         "jquery.cookie" 		: "lib/jquery-plugins/jquery.cookie", 
         "jquery.dataTables.min" : "lib/jquery-plugins/jquery.dataTables.min", 
@@ -136,16 +136,18 @@ require.config({
 //         }
 //     });
 // });
-var scripts = document.getElementsByTagName("script");
-for (var i = 0; i < scripts.length; i++) {
-    // 获取页面所需加载模块入口名称
-    var module = scripts[i].getAttribute("require-module");
-    if (module != undefined && module != "") {
-        require([ module ], function(Lib) {
-            Lib.init();
-        });
-        break;
-    }
-}
 
+require(['domReady!'], function (doc) {
+    var scripts = doc.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+        // 获取页面所需加载模块入口名称
+        var module = scripts[i].getAttribute("require-module");
+        if (module != undefined && module != "") {
+            require([ module ], function(Lib) {
+                Lib.init();
+            });
+            break;
+        }
+    }
+});
 

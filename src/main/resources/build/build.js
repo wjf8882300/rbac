@@ -41,7 +41,7 @@
     optimizeCss: 'standard',
     removeCombined: true,
     paths : {
-    	'domReady'				: 'lib/requirejs/domReady',
+    	'domReady'				: 'domReady',
         "jquery" 				: "lib/jquery/jquery-1.7.2.min",
         "jquery.cookie" 		: "lib/jquery-plugins/jquery.cookie", 
         "jquery.dataTables.min" : "lib/jquery-plugins/jquery.dataTables.min", 
