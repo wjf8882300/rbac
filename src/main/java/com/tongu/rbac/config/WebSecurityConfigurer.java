@@ -38,9 +38,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private WebUserDetailsService userDetailsService;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -54,6 +51,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         auth
             .userDetailsService(userDetailsService)
             .passwordEncoder(new PasswordEncoder() {
+            	
+            	private PasswordEncoder passwordEncoder = passwordEncoder();
 
 				@Override
 				public String encode(CharSequence rawPassword) {
