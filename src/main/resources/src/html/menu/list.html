@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="decorator" content="default"/>
+<link rel="stylesheet" href="/css/default.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<link href="/js/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrapper">
+			<form class="form-inline" id="searchForm" name="searchForm">
+				<div class="control-group">
+                  <div class="controls">
+                    <label class="control-label">菜单名称</label>
+                    <input id="menuname" type="text" name="menuname" class="ui-wizard-content">
+                    <input id="bntSearch" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="button" value="查询" sec:authorize="hasRole('ROLE_MENU_SEARCH')">
+                  </div>
+                </div>	
+                <div class="control-group">  
+                  <div class="controls">
+	              <button type="button" class="btn btn-success" id="bntAdd" sec:authorize="hasRole('ROLE_MENU_INSERT')">新增</button>
+	              <button type="button" class="btn btn-info" id="bntUpdate" sec:authorize="hasRole('ROLE_MENU_UPDATE')">编辑</button>
+	              <button type="button" class="btn btn-danger" id="bntDelete" sec:authorize="hasRole('ROLE_MENU_DELETE')">删除</button>
+	              </div>
+                </div>	
+			</form>
+			
+			<div id="maingrid4" style="margin:0; padding:0"></div> 
+	</div>
+	<script src="/js/lib/requirejs/require.js" require-module="page/menu/menu" data-main="/js/main.js"></script>	
+</body>
+</html>
