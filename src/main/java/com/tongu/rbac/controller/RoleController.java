@@ -39,17 +39,17 @@ public class RoleController extends BaseController{
 	
 	@RequestMapping(value = {"", "/list"}, method = RequestMethod.GET)
 	public String list(Model model) {	
-		return "/role/list";
+		return "role/list";
 	}
 	
 	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
 	public String detail(Model model) {
-		return "/role/detail";
+		return "role/detail";
 	}
 	
 	@RequestMapping(value = {"/grant"}, method = RequestMethod.GET)
 	public String grant(Model model) {
-		return "/role/grant";
+		return "role/grant";
 	}
 	
 	/**

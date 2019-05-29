@@ -39,19 +39,19 @@ public class UserController extends BaseController {
 	@RequestMapping(value = { "", "/list" }, method = RequestMethod.GET)
 	public String list(Model model) {
 
-		return "/user/list";
+		return "user/list";
 	}
 
 	@RequestMapping(value = { "/detail" }, method = RequestMethod.GET)
 	public String detail(Model model) {
 
-		return "/user/detail";
+		return "user/detail";
 	}
 
 	@RequestMapping(value = { "/grant" }, method = RequestMethod.GET)
 	public String grant(Model model) {
 
-		return "/user/grant";
+		return "user/grant";
 	}
 
 	@GetMapping("/query")

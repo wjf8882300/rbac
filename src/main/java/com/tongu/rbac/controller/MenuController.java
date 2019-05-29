@@ -39,13 +39,13 @@ public class MenuController extends BaseController{
 	@RequestMapping(value = {"", "/list"}, method = RequestMethod.GET)
 	public String list(Model model) {
 	
-		return "/menu/list";
+		return "menu/list";
 	}
 	
 	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
 	public String detail(Model model) {
 	
-		return "/menu/detail";
+		return "menu/detail";
 	}
 	
 	@GetMapping("/query/by/user/{userId}")
