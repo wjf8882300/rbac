@@ -4,7 +4,7 @@
 require.config({
 	
     paths : {
-    	'domReady'				: 'domReady',
+    	'domReady'				: 'https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/domReady',
         "jquery" 				: "lib/jquery/jquery-1.7.2.min",
         "jquery.cookie" 		: "lib/jquery-plugins/jquery.cookie", 
         "jquery.dataTables.min" : "lib/jquery-plugins/jquery.dataTables.min", 
@@ -61,6 +61,17 @@ require.config({
         
         "Common"				: "page/common",
         "Constant"				: "page/constant",
+
+        "page/index"            : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/index",
+        "page/login"            : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/login",
+        "page/user/user"        : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/user/user",
+        "page/user/userDetail"  : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/user/userDetail",
+        "page/user/userGrant"   : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/user/userGrant",
+        "page/role/role"        : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/role/role",
+        "page/role/roleDetail"  : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/role/roleDetail",
+        "page/role/roleGrant"   : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/role/roleGrant",
+        "page/menu/menu"        : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/menu/menu",
+        "page/menu/menuDetail"  : "https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/page/menu/menuDetail",
     },
     
     shim: {

@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
-<meta name="decorator" content="default"/>
-<link rel="stylesheet" href="/css/default.css" />
-<link rel="stylesheet" href="/css/common.css" />
-<link href="/js/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <meta name="decorator" content="default" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/2.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/2.3.0/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/css/default.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link href="https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-	<div id="wrapper">
-			<form class="form-inline" id="searchForm" name="searchForm">
-				<div class="control-group">
-                  <div class="controls">
+    <div id="wrapper">
+        <form class="form-inline" id="searchForm" name="searchForm">
+            <div class="control-group">
+                <div class="controls">
                     <label class="control-label">角色名称</label>
                     <input id="username" type="text" name="username" class="ui-wizard-content">
-                    <input id="bntSearch" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="button" value="查询"  sec:authorize="hasRole('ROLE_ROLE_SEARCH')">
-                  </div>
-                </div>	
-                <div class="control-group">  
-                  <div class="controls">
-	              <button type="button" class="btn btn-success" id="bntAdd"  sec:authorize="hasRole('ROLE_ROLE_INSERT')">新增</button>
-	              <button type="button" class="btn btn-info" id="bntUpdate"  sec:authorize="hasRole('ROLE_ROLE_UPDATE')">编辑</button>
-	              <button type="button" class="btn btn-danger" id="bntDelete"  sec:authorize="hasRole('ROLE_ROLE_DELETE')">删除</button>
-	              <button type="button" class="btn btn-grey marR10" id="bntPermissions"  sec:authorize="hasRole('ROLE_GRANT_MENUS')">分配权限</button>
-	              </div>
-                </div>	
-			</form>
-			
-			<div id="maingrid4" style="margin:0; padding:0"></div> 
-	</div>
-	<script src="/js/require.js" require-module="page/role/role" data-main="/js/main.js"></script>	
+                    <input id="bntSearch" class="btn btn-primary ui-wizard-content ui-formwizard-button" type="button"
+                        value="查询" sec:authorize="hasRole('ROLE_ROLE_SEARCH')">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="button" class="btn btn-success" id="bntAdd"
+                        sec:authorize="hasRole('ROLE_ROLE_INSERT')">新增</button>
+                    <button type="button" class="btn btn-info" id="bntUpdate"
+                        sec:authorize="hasRole('ROLE_ROLE_UPDATE')">编辑</button>
+                    <button type="button" class="btn btn-danger" id="bntDelete"
+                        sec:authorize="hasRole('ROLE_ROLE_DELETE')">删除</button>
+                    <button type="button" class="btn btn-grey marR10" id="bntPermissions"
+                        sec:authorize="hasRole('ROLE_GRANT_MENUS')">分配权限</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="maingrid4" style="margin:0; padding:0"></div>
+    </div>
+    <script src="https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/require.js" require-module="page/role/role"
+        data-main="https://tonggu.oss-cn-shanghai.aliyuncs.com/rbac/js/main.js"></script>
 </body>
+
 </html>
